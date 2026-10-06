@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="zh-Hans">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="theme-color" content="#0a0a0f" />
+  <title>裸眼3D · SBS 左右并排</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <div class="app">
+    <header class="header">
+      <div class="logo">
+        <span class="logo-icon" aria-hidden="true">◈</span>
+        <h1>裸眼3D</h1>
+      </div>
+      <p class="tagline">SBS 左右并排 · 上传预览 · 保存到系统相册</p>
+    </header>
+
+    <aside class="notice" role="note">
+      <strong>说明：</strong>本应用仅生成 <strong>SBS（左右并排）</strong> 立体视频，适合大多数 3D / VR 播放器。真正的硬件裸眼3D（柱镜屏）另需兼容屏幕；此处为实用的左右视差近似。
+    </aside>
+
+    <section class="card upload-card" id="uploadSection">
+      <div class="dropzone" id="dropzone" tabindex="0" role="button" aria-label="上传视频">
+        <input type="file" id="fileInput" accept="video/*" hidden />
+        <div class="dropzone-inner">
+          <div class="upload-icon" aria-hidden="true">⬆</div>
+          <p class="upload-title">上传视频</p>
+          <p class="upload-hint">点击选择，或拖拽到此处<br />支持 MP4 / WebM / MOV</p>
+          <button type="button" class="btn btn-primary" id="pickBtn">选择视频</button>
+        </div>
+      </div>
+    </section>
+
+    <section class="workspace" id="workspace" hidden>
+      <div class="preview-grid">
+        <div class="preview-panel">
+          <div class="panel-label">原始视频</div>
+          <div class="video-wrap">
+            <video id="sourceVideo" playsinline muted loop></video>
+          </div>
+        </div>
+        <div class="preview-panel preview-panel--main">
+          <div class="panel-label">
+            <span>SBS 预览</span>
+            <span class="mode-badge">左右并排</span>
+          </div>
+          <div class="canvas-wrap" id="canvasWrap">
+            <canvas id="outputCanvas"></canvas>
+            <div class="preview-overlay" id="previewOverlay">
+              <button type="button" class="btn-icon play-overlay" id="playOverlay" aria-label="播放">▶</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="card controls-card">
+        <div class="control-group">
+          <div class="output-chip">
+            <span class="output-chip-title">输出格式</span>
+            <span class="output-chip-value">SBS 左右并排</span>
+          </div>
+        </div>
+
+        <div class="btn-row">
+          <button type="button" class="btn btn-secondary" id="playBtn" aria-label="播放/暂停">▶ 播放</button>
+          <button type="button" class="btn btn-secondary" id="regenBtn">↻ 重新生成</button>
+        </div>
+
+        <div class="btn-row">
+          <button type="button" class="btn btn-primary btn-block" id="exportWebmBtn">保存到系统相册</button>
+        </div>
+        <p class="export-hint">点一次即从片头录到片尾并自动下载（优先 MP4，否则 WebM），无需再点第二次。手机上可用系统分享/文件应用存入相册。</p>
+
+        <div class="btn-row">
+          <button type="button" class="btn btn-ghost btn-block" id="changeVideoBtn">更换视频</button>
+        </div>
+
+        <p class="status" id="statusText" aria-live="polite"></p>
+        <div class="progress" id="progressBar" hidden>
+          <div class="progress-fill" id="progressFill"></div>
+        </div>
+      </div>
+    </section>
+
+    <footer class="footer">
+      <p>纯前端 · 离线可用 · 仅 SBS</p>
+    </footer>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>
