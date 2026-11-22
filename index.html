@@ -2,11 +2,12 @@
 <html lang="zh-Hans">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
   <meta name="theme-color" content="#0a0a0f" />
+  <meta name="build" content="20261122sbs1" />
   <title>裸眼3D · SBS 左右并排</title>
-  <link rel="stylesheet" href="styles.css" />
+  <link rel="stylesheet" href="styles.css?v=20261122sbs1" />
 </head>
 <body>
   <div class="app">
@@ -15,11 +16,13 @@
         <span class="logo-icon" aria-hidden="true">◈</span>
         <h1>裸眼3D</h1>
       </div>
-      <p class="tagline">SBS 左右并排 · 上传预览 · 保存到系统相册</p>
+      <p class="tagline">全宽 SBS 左右并排 · 上传预览 · 一键录制下载</p>
     </header>
 
     <aside class="notice" role="note">
-      <strong>说明：</strong>本应用仅生成 <strong>SBS（左右并排）</strong> 立体视频，适合大多数 3D / VR 播放器。真正的硬件裸眼3D（柱镜屏）另需兼容屏幕；此处为实用的左右视差近似。
+      <strong>说明：</strong>本应用只做 <strong>全宽 SBS（左右并排）</strong>。左右眼都完整保留原画面的四边和比例，只按固定视差（8）水平错开，不足处用黑边补上，<strong>不裁切、不拉伸</strong>。
+      这不是半宽 SBS：半宽会把每只眼横向压成一半，好让成片比例回到原片；播放器请选 Full / Side-by-Side，不要选 Half。
+      真正的硬件裸眼3D（柱镜屏）还需要对应的屏幕。
     </aside>
 
     <section class="card upload-card" id="uploadSection">
@@ -39,13 +42,13 @@
         <div class="preview-panel">
           <div class="panel-label">原始视频</div>
           <div class="video-wrap">
-            <video id="sourceVideo" playsinline muted loop></video>
+            <video id="sourceVideo" playsinline webkit-playsinline muted loop preload="auto"></video>
           </div>
         </div>
         <div class="preview-panel preview-panel--main">
           <div class="panel-label">
             <span>SBS 预览</span>
-            <span class="mode-badge">左右并排</span>
+            <span class="mode-badge">全宽 · 左右并排</span>
           </div>
           <div class="canvas-wrap" id="canvasWrap">
             <canvas id="outputCanvas"></canvas>
@@ -60,8 +63,14 @@
         <div class="control-group">
           <div class="output-chip">
             <span class="output-chip-title">输出格式</span>
-            <span class="output-chip-value">SBS 左右并排</span>
+            <span class="output-chip-value">全宽 SBS</span>
           </div>
+          <p class="dim-readout" id="dimReadout" hidden></p>
+          <p class="sbs-explain">
+            预览是导出画面的等比缩小，宽高比与下载文件一致，四边都在画面内。
+            左右两侧的细黑边是视差留白，不是裁切。视差强度固定为 8，没有滑杆。
+            成片宽度是两只眼并排（每眼保持原比例），高度与单眼相同。
+          </p>
         </div>
 
         <div class="btn-row">
@@ -72,7 +81,7 @@
         <div class="btn-row">
           <button type="button" class="btn btn-primary btn-block" id="exportWebmBtn">保存到系统相册</button>
         </div>
-        <p class="export-hint">点一次即从片头录到片尾并自动下载（优先 MP4，否则 WebM），无需再点第二次。手机上可用系统分享/文件应用存入相册。</p>
+        <p class="export-hint">点一次即从片头录到片尾并自动下载（优先 MP4，否则 WebM），无需再点第二次。播放预览带原声，下载文件也保留原声。浏览器只能下载文件，不能直接写入手机「照片」相册；请再用系统分享或「文件」应用保存到相册。</p>
 
         <div class="btn-row">
           <button type="button" class="btn btn-ghost btn-block" id="changeVideoBtn">更换视频</button>
@@ -86,10 +95,11 @@
     </section>
 
     <footer class="footer">
-      <p>纯前端 · 离线可用 · 仅 SBS</p>
+      <p>纯前端 · 仅全宽 SBS · 不裁切原画面</p>
     </footer>
   </div>
 
-  <script src="app.js"></script>
+  <script src="sbs-core.js?v=20261122sbs1"></script>
+  <script src="app.js?v=20261122sbs1"></script>
 </body>
 </html>

@@ -1,0 +1,12 @@
+{
+  "name": "quzhengle-sbs",
+  "private": true,
+  "scripts": {
+    "test": "node --test test/layout.test.js test/source-guards.test.js",
+    "test:browser": "node test/export-browser.mjs",
+    "test:all": "npm test && npm run test:browser"
+  },
+  "devDependencies": {
+    "puppeteer-core": "^24.36.0"
+  }
+}

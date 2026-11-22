@@ -256,7 +256,8 @@ body {
   background: var(--bg-card);
   border: 1px solid var(--border);
   border-radius: var(--radius);
-  overflow: hidden;
+  overflow: visible;
+  min-width: 0;
 }
 
 .panel-label {
@@ -286,16 +287,27 @@ body {
 .canvas-wrap {
   position: relative;
   background: #000;
-  aspect-ratio: 16 / 9;
+  width: 100%;
+  min-width: 0;
+  min-height: 120px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  /* Clip only to this fitted box. The media is sized to the full frame,
+     so the box matches the bitmap instead of a fixed 16:9 crop. */
   overflow: hidden;
 }
 
 .video-wrap video,
 .canvas-wrap canvas {
   display: block;
-  width: 100%;
-  height: 100%;
+  width: auto;
+  height: auto;
+  max-width: 100%;
+  flex: 0 0 auto;
   object-fit: contain;
+  object-position: center center;
+  background: #000;
 }
 
 .preview-overlay {
@@ -350,6 +362,22 @@ body {
   font-size: 1rem;
   font-weight: 700;
   color: #fff;
+}
+
+.dim-readout {
+  margin-top: 10px;
+  font-size: 0.75rem;
+  line-height: 1.45;
+  color: #d7d4ea;
+  text-align: center;
+  word-break: break-word;
+}
+
+.sbs-explain {
+  margin-top: 8px;
+  font-size: 0.75rem;
+  line-height: 1.55;
+  color: var(--text-muted);
 }
 
 .export-hint {
